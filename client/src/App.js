@@ -9,6 +9,7 @@ function App() {
        <Router>
         <Routes>
           <Route path="/" element={< Olog/>} />
+          
           <Route path="/reg" element={<Reg/>} />
         </Routes>
       </Router>

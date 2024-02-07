@@ -1,6 +1,8 @@
 import React,{useState} from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export const Olog = () => {
+  const navigate = useNavigate();
     const [email,setEmail]=useState("")
     const [password,setPassword]=useState("")
     const regUser=async(event)=>{
@@ -17,7 +19,14 @@ export const Olog = () => {
             })
           })
           const data=await response.json()
-          console.log(data)
+          if(data.user){
+            alert("login sucessfull")
+            console.log(data.name)
+          }
+          else{
+            alert("please check the email id and password")
+          }
+          
     }
   return (
     <div>
@@ -26,6 +35,7 @@ export const Olog = () => {
            
             <input type='email' placeholder='Enter youe email' value={email} onChange={(e)=>setEmail(e.target.value)}/><br />
             <input type='password' placeholder='Enter your password' value={password} onChange={(e)=>setPassword(e.target.value)} /><br />
+            <p onClick={()=>{ navigate('/reg')}}>Want to go reg click</p>
              <button type='submit'>Login</button>
         </form>
     </div>

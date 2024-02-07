@@ -7,12 +7,14 @@
 //npm add cors ()
 //npm install mongoose
 //so basicaally all this stuff is middleware because we need to store in json way in our server then after that we need to connec t mongo db database
+//intal json web token (npm install jsonwebtoken)
 
 const express = require('express');
 const cors = require('cors');
 const mongoose=require('mongoose')
 const app = express();
 const User = require('./models/user.model');
+const jwt=require('jsonwebtoken')
 
 app.use(cors());
 app.use(express.json()); // Corrected usage
@@ -36,12 +38,17 @@ app.post('/api/register', async(req, res) => {
 app.post('/api/login', async(req, res) => {
    
    const user=await User.findOne({
- 
+   
     email : req.body.email,
     password : req.body.password
    })
    if(user){
-   return res.json({status : "ok",user : true})
+    const token=jwt.sign({
+          name : user.name,
+          email : user.email,
+         
+    },'secrete123')
+   return res.json({status : "ok",user : token,name : user.name})
    }
    else
    {
