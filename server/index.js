@@ -21,6 +21,7 @@ app.use(express.json()); // Corrected usage
 mongoose.connect('mongodb://localhost:27017/chat-app',{useNewUrlParser: true, useUnifiedTopology: true })
 
 app.post('/api/register', async(req, res) => {
+    const {name,email,password}=req.body;
     try{
    const user=await User.create({
     name : req.body.name,
@@ -56,6 +57,14 @@ app.post('/api/login', async(req, res) => {
    }
    
 });
+app.post('/api/home', (req, res) => {
+    // You may want to add additional logic here, such as invalidating the token on the server-side
+    // or clearing any session data.
+
+    res.clearCookie('jwtToken');  // Clear the token from cookies (replace with your token name)
+    res.json({ status: 'ok', message: 'Logout successful' });
+});
+
 
 // Start the server
 app.listen(1337, () => {

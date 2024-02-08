@@ -1,0 +1,15 @@
+body {
+    margin: 0; /* Remove default body margin */
+  }
+  
+  .main {
+    background: url('https://mir-s3-cdn-cf.behance.net/project_modules/hd/ef9a3260506271.5a4f65ff2e513.gif') no-repeat;
+    background-size: cover;
+    height: 100vh;
+    position: relative; /* Add positioning */
+    color: white;
+ 
+  }
+  
+  
+  
